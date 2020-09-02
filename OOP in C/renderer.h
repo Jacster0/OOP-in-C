@@ -1,5 +1,5 @@
 #pragma once
-typedef enum { SUCCEED, FAILED } state_t;
+typedef enum { GOOD, BAD } state_t;
 
 //public attribute
 typedef struct {

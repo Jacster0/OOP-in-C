@@ -2,7 +2,8 @@
 #include <stdio.h>
 
 int main() {
-    struct render_t* renderer = renderer_new();
+
+    renderer_t* renderer = renderer_new();
 
     renderer_ctor(renderer);
     //call to base class non virtual func
@@ -11,9 +12,11 @@ int main() {
     renderer_pure_virt_load_pipeline(renderer);
     //call to base class virtual func
     renderer_draw(renderer);
+    
+    //access base class public member
+    printf("State: %s", renderer->state == GOOD ? "good" : "bad");
 
     renderer_dtor(renderer);
     free(renderer);
-    
     getchar();
 }
