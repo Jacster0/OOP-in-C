@@ -22,7 +22,7 @@ void __d3d12_renderer_draw(void* ptr) {
             if (renderer->mesh != NULL) {
                 printf("Using d3d12 API to draw mesh with %d vertices to screen...\n", renderer->mesh->num_vertices);
                 if (renderer->mesh->has_texcoords) {
-                    printf("Applying texture to mesh\n");
+                    printf("Applying texture to mesh...\n");
                 }
                 else {
                     printf("Mesh does not support texturing\n");
@@ -53,8 +53,7 @@ d3d12_renderer_t* d3d12_renderer_new() {
 void d3d12_renderer_ctor(d3d12_renderer_t* d3d12_renderer) {
     renderer_ctor(d3d12_renderer);
     printf("creating d3d12_renderer...\n");
-    d3d12_renderer->renderer.renderer_vtable.draw_func = __d3d12_renderer_draw;
-    d3d12_renderer->renderer.renderer_vtable.load_pipeline_func = __d3d12_renderer_load_pipeline;
+    d3d12_renderer->renderer.renderer_vtable = (vtable){ __d3d12_renderer_draw, __d3d12_renderer_load_pipeline };
     d3d12_renderer->renderer.device = device_new();
     device_ctor(d3d12_renderer->renderer.device);
 }

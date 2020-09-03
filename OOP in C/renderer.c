@@ -19,7 +19,7 @@ void __renderer_draw(void* ptr) {
             else {
                 printf("Mesh does not support texturing\n");
             }
-        } 
+        }
     }
     else {
         printf("state: bad\n");
@@ -37,8 +37,7 @@ void renderer_ctor(renderer_t* renderer) {
     renderer->state = BAD;
     renderer->res.height = GetSystemMetrics(SM_CYSCREEN);
     renderer->res.width = GetSystemMetrics(SM_CXSCREEN);
-    renderer->renderer_vtable.draw_func = __renderer_draw;
-    renderer->renderer_vtable.load_pipeline_func = NULL;
+    renderer->renderer_vtable = (vtable){ __renderer_draw, NULL };
     renderer->mesh = NULL;
 }
 void renderer_dtor(renderer_t* renderer) {
