@@ -3,9 +3,11 @@
 
 struct device_t;
 struct renderer_t;
+struct vtable;
 
 //Allocator
 struct renderer_t* renderer_new();
+
 
 //ctor/dtor
 void renderer_ctor(struct renderer_t* renderer);

@@ -11,8 +11,8 @@ typedef struct {
 void __d3d12_renderer_draw(void* ptr) {
     char buffer[32];
     renderer_t* renderer = ptr;
-    if (renderer->load_pipeline_func != NULL) {
-        renderer->load_pipeline_func(renderer);
+    if (renderer->renderer_vtable.load_pipeline_func != NULL) {
+        renderer->renderer_vtable.load_pipeline_func(renderer);
 
         if (renderer->state == GOOD) {
             device_get_id(renderer->device, buffer);
@@ -53,8 +53,8 @@ d3d12_renderer_t* d3d12_renderer_new() {
 void d3d12_renderer_ctor(d3d12_renderer_t* d3d12_renderer) {
     renderer_ctor(d3d12_renderer);
     printf("creating d3d12_renderer...\n");
-    d3d12_renderer->renderer.draw_func = __d3d12_renderer_draw;
-    d3d12_renderer->renderer.load_pipeline_func = __d3d12_renderer_load_pipeline;
+    d3d12_renderer->renderer.renderer_vtable.draw_func = __d3d12_renderer_draw;
+    d3d12_renderer->renderer.renderer_vtable.load_pipeline_func = __d3d12_renderer_load_pipeline;
     d3d12_renderer->renderer.device = device_new();
     device_ctor(d3d12_renderer->renderer.device);
 }

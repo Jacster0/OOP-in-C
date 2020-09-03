@@ -8,6 +8,11 @@ typedef void(*renderer_draw_func_t)(void*);
 typedef void(*renderer_load_pipeline_func_t)(void*);
 
 typedef struct {
+    renderer_draw_func_t draw_func;
+    renderer_load_pipeline_func_t load_pipeline_func;
+} vtable;
+
+typedef struct {
     DWORD height;
     DWORD width;
 } resolution;
@@ -17,6 +22,5 @@ typedef struct {
     struct device_t* device;
     mesh_t* mesh;
     resolution res;
-    renderer_draw_func_t draw_func;
-    renderer_load_pipeline_func_t load_pipeline_func;
+    vtable renderer_vtable;
 } renderer_t;
