@@ -1,10 +1,8 @@
 #pragma once
-typedef enum { GOOD, BAD } state_t;
+#include "resources.h"
 
-//public attribute
-typedef struct {
-    state_t state;
-} renderer_t;
+struct device_t;
+struct renderer_t;
 
 //Allocator
 struct renderer_t* renderer_new();
