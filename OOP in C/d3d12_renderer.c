@@ -18,7 +18,16 @@ void __d3d12_renderer_draw(void* ptr) {
             device_get_id(renderer->device, buffer);
             printf("device id: %s\n", buffer);
             printf("state: good\n");
-            printf("Using d3d12 API to draw to screen\n");
+
+            if (renderer->mesh != NULL) {
+                printf("Using d3d12 API to draw mesh with %d vertices to screen...\n", renderer->mesh->num_vertices);
+                if (renderer->mesh->has_texcoords) {
+                    printf("Applying texture to mesh\n");
+                }
+                else {
+                    printf("Mesh does not support texturing\n");
+                }
+            }
         }
         else {
             printf("state: bad\n");
@@ -43,7 +52,7 @@ d3d12_renderer_t* d3d12_renderer_new() {
 
 void d3d12_renderer_ctor(d3d12_renderer_t* d3d12_renderer) {
     renderer_ctor(d3d12_renderer);
-    printf("creating d3d12_renderer\n");
+    printf("creating d3d12_renderer...\n");
     d3d12_renderer->renderer.draw_func = __d3d12_renderer_draw;
     d3d12_renderer->renderer.load_pipeline_func = __d3d12_renderer_load_pipeline;
     d3d12_renderer->renderer.device = device_new();
@@ -53,6 +62,6 @@ void d3d12_renderer_ctor(d3d12_renderer_t* d3d12_renderer) {
 void d3d12_renderer_dtor(d3d12_renderer_t* d3d12_renderer) {
     device_dtor(d3d12_renderer->renderer.device);
     free(d3d12_renderer->renderer.device);
-    printf("destroying d3d12_renderer\n");
+    printf("destroying d3d12_renderer...\n");
     renderer_dtor(d3d12_renderer);
 }
