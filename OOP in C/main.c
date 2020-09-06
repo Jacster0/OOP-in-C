@@ -5,10 +5,10 @@
 #include <stdio.h>
 
 int main() {
-    struct renderer_t* renderer = renderer_new();
     mesh_t* mesh = mesh_new();
     mesh_ctor(mesh, 3000, true);
 
+    struct renderer_t* renderer = renderer_new();
     renderer_ctor(renderer);
     //call to base class non virtual func
     renderer_non_virt_display_screen_res(renderer);
@@ -18,8 +18,8 @@ int main() {
     //call to base class virtual func
     renderer_draw(renderer);
     render_non_virt_unload_mesh(renderer, mesh);
-    renderer_dtor(renderer);
 
+    renderer_dtor(renderer);
 
     printf("\n\n");
 
@@ -33,7 +33,7 @@ int main() {
     // call to child class overriden func
     renderer_draw(d3d12_renderer);
     render_non_virt_unload_mesh(d3d12_renderer, mesh);
-    //access base class public member
+
     d3d12_renderer_dtor(d3d12_renderer);
     mesh_dtor(mesh);
 
