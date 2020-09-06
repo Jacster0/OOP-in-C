@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <time.h>
 
 typedef enum { YES, NO } has_id_t;
 
@@ -13,6 +14,7 @@ typedef struct {
 
 // private behavior functions impl
 void make_id(char* buffer, int length) {
+    srand(time(0));
     char charset[] = "0123456789" "abcdefghijklmnopqrstuvwxyz" "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     while (length-- > 0) {
